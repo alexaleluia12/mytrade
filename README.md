@@ -8,7 +8,7 @@ mesma ordem
 uso
 ```sh
 mytrade 15.12 -queda 0.93
-mytrade 20.8 12.34 45.2 -queda 2.0
+mytrade 20.8 12.34 45.2 # padrao queda de 2%
 mytrade 20.8 12.34 45.2 -alta 3.2
 ```
 

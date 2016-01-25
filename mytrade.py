@@ -4,13 +4,14 @@
 """
 # uso
 $ mytrade 15.12 -queda 0.93
-$ mytrade 20.8 12.34 45.2 -queda 2.0
-$ mytrade 20.8 12.34 45.2 -queda 3.2
+$ mytrade 20.8 12.34 45.2
+$ mytrade 20.8 12.34 45.2 5.98 -alta 3.2
 
 """
 import argparse
 from decimal import Decimal
 
+padrao_queda = 2.0
 
 def queda(porcentagem, lst_acoes):
     porcentagem = Decimal(str(porcentagem))/Decimal('100.0')
@@ -26,7 +27,7 @@ def alta(porcentagem, lst_acoes):
 
 
 def printer(lst):
-    # lst eh um interator de Decimal objets
+    # lst eh um iterator de Decimal objets
     # e o metodo de format com float funciona do mesmo geito para Decimal
     for i in lst:
         print('{:.2f}'.format(i), end=' ')
@@ -37,7 +38,8 @@ def test():
     assert '47.05' == '{:.2f}'.format(v)
 
 def main():
-    parser = argparse.ArgumentParser(description='Cálculo porcentagem')
+    parser = argparse.ArgumentParser(description='Cálculo porcentagem.\
+    \nPor padrão usa parametro queda de 2% `-queda 2`')
     
     parser.add_argument('acoes', metavar='valor', type=float, nargs='+',
                        help='valor das ações (73. 29.1 ... )')
@@ -56,6 +58,8 @@ def main():
     elif args.queda:
         valor = args.queda
         printer(queda(valor, acoes))
+    else:
+        printer(queda(padrao_queda, acoes))
     print()
 
 if __name__ == '__main__':
